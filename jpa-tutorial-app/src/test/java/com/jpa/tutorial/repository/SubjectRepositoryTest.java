@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Commit;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -46,4 +47,10 @@ class SubjectRepositoryTest {
         Subject subject = subjectFuture.get();
         assertNotNull(subject);
     }
+
+//    @Test
+//    public void testSubjectWithQuery(){
+//        Subject subject = repo.findQuery(1);
+//        assertThat(subject).isNotNull();
+//    }
 }

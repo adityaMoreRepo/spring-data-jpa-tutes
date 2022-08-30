@@ -2,6 +2,7 @@ package com.jpa.tutorial.DAO;
 
 import com.jpa.tutorial.entity.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,18 @@ public class SubjectDaoImpUsingJdbcTemplate implements SubjectDao {
         return template.query("select * from subject", new SubjectRowMapper());
     }
 
+    // save subject
+    public int save(Subject subject) {
+        String insert = "INSERT INTO SUBJECT" +
+                "(subject_name, total_marks, marks_obtained, passing_marks)" +
+                " VALUES(?, ?, ?, ?)";
+        return template.update(insert,
+                subject.getSubjectName(),
+                subject.getTotalMarks(),
+                subject.getMarksObtained(),
+                subject.getPassingMarks());
+    }
+
     @Override
     public Subject findById(int id) {
         return template.queryForObject("select * from subject where subject_id = ?", new SubjectRowMapper(), id);
@@ -31,6 +44,23 @@ public class SubjectDaoImpUsingJdbcTemplate implements SubjectDao {
     public int deleteSubject(int id) {
         return template.update("delete from subject where id = ?", id);
     }
+
+    public List<Subject> findAllWithPagination(int size, int offset) {
+        String query = "SELECT * FROM SUBJECT LIMIT ? OFFSET ?";
+        return template.query(query, new SubjectRowMapper(), size, offset);
+    }
+
+    //using pageable
+    // pageable helps in getting offset logic without writing it
+    //manually everytime offset = pageSize * page
+    public List<Subject> findAllWithPagination(Pageable pageable) {
+        String query = "SELECT * FROM SUBJECT LIMIT ? OFFSET ?";
+        return template.query(query,
+                new SubjectRowMapper(),
+                pageable.getPageSize(),
+                pageable.getOffset());
+    }
+
 
     class SubjectRowMapper implements RowMapper<Subject> {
 

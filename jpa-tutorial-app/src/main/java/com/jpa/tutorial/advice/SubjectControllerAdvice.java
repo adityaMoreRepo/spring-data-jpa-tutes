@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import javax.persistence.EntityNotFoundException;
 
 @ControllerAdvice
-public class StudentControllerAdvice {
+public class SubjectControllerAdvice {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<String > studentNotFoundHandler(){
         return new ResponseEntity<>("No Such Subject Exists", HttpStatus.NOT_FOUND  );

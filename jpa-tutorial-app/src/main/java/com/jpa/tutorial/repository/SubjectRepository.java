@@ -2,6 +2,7 @@ package com.jpa.tutorial.repository;
 
 import com.jpa.tutorial.entity.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.scheduling.annotation.Async;
 
 import java.util.List;
@@ -21,4 +22,7 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
     @Async
     Future<Subject> queryBySubjectName(String name);
 
+    // JPQL query
+//    @Query("SELECT s FROM subject s WHERE s.subject_id = ?1")
+//    Subject findQuery(int id);
 }
