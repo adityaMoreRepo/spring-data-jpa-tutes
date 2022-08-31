@@ -1,13 +1,11 @@
 package com.jpa.tutorial.controller;
 
-import com.jpa.tutorial.entity.Course;
 import com.jpa.tutorial.entity.Subject;
 import com.jpa.tutorial.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -72,6 +70,5 @@ public class SubjectController {
                                                    @RequestParam Optional<String> sortBy) {
         return repo.findAll(PageRequest.of(page.orElse(0), size.orElse(4), ASC, sortBy.orElse("SubjectId")));
     }
-
 
 }

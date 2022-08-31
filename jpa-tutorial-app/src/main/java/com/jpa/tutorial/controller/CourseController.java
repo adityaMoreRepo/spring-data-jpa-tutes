@@ -23,5 +23,15 @@ public class CourseController {
         return repo.findAll(PageRequest.of(page, size));
     }
 
+    @GetMapping("/byId/{id}")
+    public Course getCourse(@PathVariable int id){
+        return repo.findCourseById(id);
+    }
+
+    @PostMapping("/create")
+    public Course createCourse(@RequestBody Course course){
+        return repo.save(course);
+    }
+
 
 }
