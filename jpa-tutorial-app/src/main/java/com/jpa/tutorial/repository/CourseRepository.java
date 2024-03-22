@@ -19,7 +19,7 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
     @Query("select c from Course c where c.courseId = :id")
     Course findCourseById(@Param("id") int id);
 
-    // Native SQL queries
+    // Native MySQL queries
     @Query(
             value = "SELECT * FROM course c WHERE c.standard = :standard",
             nativeQuery = true
